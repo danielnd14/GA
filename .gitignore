@@ -40,7 +40,7 @@ build
 .idea
 *.iws
 *.iml
-lookup.iml
+
 *.ipr
 /out/production
 out/production
