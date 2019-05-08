@@ -20,7 +20,7 @@ public abstract class AbstractPopulation {
 	public final int POPULATION_SIZE;
 	public final int ELITISM;
 	final int MAX_GENERATIONS;
-	public final double CROSSOVER_RATE;
+	protected final double CROSSOVER_RATE;
 	protected final double MUTATION_RATE;
 
 	public AbstractPopulation(final MergeOperation mergeStrategy,
@@ -69,7 +69,6 @@ public abstract class AbstractPopulation {
 	protected abstract boolean isValid(final Solution solution);
 
 	Solution getBestSolution() {
-		//this.members.removeIf(solution -> !this.isValid(solution));
 		return this.members.parallelStream().max((Solution::compareTo)).orElse(null);
 	}
 

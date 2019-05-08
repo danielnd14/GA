@@ -29,7 +29,7 @@ public class Releases implements Solution {
 	final Set<Requirement> sprint1 = new HashSet<>();
 	final Set<Requirement> sprint2 = new HashSet<>();
 	final Set<Requirement> sprint3 = new HashSet<>();
-	final Set<Requirement> sprint0 = new HashSet<>();
+	private final Set<Requirement> sprint0 = new HashSet<>();
 
 	final static int sizeOfChromosome = 10;
 	private double penalty = 1;
@@ -56,11 +56,6 @@ public class Releases implements Solution {
 			throw new RuntimeException("tamanho da representação inválido");
 		}
 		chromosome = () -> representation;
-		organizaSprint();
-	}
-
-	Releases(final Chromosome<Integer[]> chromosome) {
-		this.chromosome = chromosome;
 		organizaSprint();
 	}
 

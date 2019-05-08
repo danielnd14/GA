@@ -14,7 +14,8 @@ public class ReleaseProblemMain {
 		AbstractPopulation a = new ReleasesPopulationBuilder()
 				.withBinaryTournamentSelection()
 				.withRankMergeStratey()
-				.withMutationRate(0.001)
+				.withPopulationSize(400)
+				.withMutationRate(0)
 				.build();
 
 		System.out.println(new GeneticAlgorithm(a).simule());
