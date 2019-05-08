@@ -7,6 +7,16 @@ public class Requirement {
 	private final double avgClient;
 	private Double importancia;
 
+	Requirement(final int id,
+				final double cost,
+				final double risk,
+				final double avgClient) {
+		this.id = id;
+		this.cost = cost;
+		this.risk = risk;
+		this.avgClient = avgClient;
+	}
+
 	double getCost() {
 		return cost;
 	}
@@ -21,15 +31,5 @@ public class Requirement {
 	@Override
 	public String toString() {
 		return "Requirement{" + id + "}";
-	}
-
-	Requirement(final int id,
-				final double cost,
-				final double risk,
-				final double avgClient) {
-		this.id = id;
-		this.cost = cost;
-		this.risk = risk;
-		this.avgClient = avgClient;
 	}
 }

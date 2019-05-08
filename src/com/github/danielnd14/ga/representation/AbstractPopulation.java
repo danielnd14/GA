@@ -8,21 +8,15 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractPopulation {
 	protected static final Random r = new Random();
-
-	public List<Solution> getOffSpring() {
-		return offSpring;
-	}
-
-	protected final List<Solution> members;
-	protected final List<Solution> offSpring;
-	private final MergeOperation mergeStrategy;
-	protected final SelectionOperation selectionStrategy;
 	public final int POPULATION_SIZE;
 	public final int ELITISM;
-	final int MAX_GENERATIONS;
+	protected final List<Solution> members;
+	protected final List<Solution> offSpring;
+	protected final SelectionOperation selectionStrategy;
 	protected final double CROSSOVER_RATE;
 	protected final double MUTATION_RATE;
-
+	final int MAX_GENERATIONS;
+	private final MergeOperation mergeStrategy;
 	public AbstractPopulation(final MergeOperation mergeStrategy,
 							  final SelectionOperation selectionStrategy,
 							  final int populationSize,
@@ -43,6 +37,9 @@ public abstract class AbstractPopulation {
 
 	}
 
+	public List<Solution> getOffSpring() {
+		return offSpring;
+	}
 
 	private void initPopulation() {
 		Set<Solution> temp = new HashSet<>();

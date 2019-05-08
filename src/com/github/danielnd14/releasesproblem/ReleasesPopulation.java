@@ -19,9 +19,22 @@ public final class ReleasesPopulation extends AbstractPopulation {
 		super(mergeStrategy, selectionStrategy, populationSize, elitism, maxGenerations, crossoverRate, mutationRate);
 	}
 
+	private static Releases giveMeSon(final Integer[] partA, final Integer[] partB) {
+		final var representation = new Integer[Releases.sizeOfChromosome];
+		for (int i = 0; i < Releases.sizeOfChromosome; i++) {
+			if (i < partA.length) {
+				representation[i] = partA[i];
+			} else {
+				representation[i] = partB[i - partA.length];
+			}
+		}
+
+		return new Releases(representation);
+	}
+
 	@Override
 	protected void crossOver() {
-		while (this.offSpring.size() < this.POPULATION_SIZE-1) {
+		while (this.offSpring.size() < this.POPULATION_SIZE - 1) {
 			final var fatherA = selectionStrategy.select(this);
 			final var fatherB = selectionStrategy.select(this);
 
@@ -49,19 +62,6 @@ public final class ReleasesPopulation extends AbstractPopulation {
 			}
 		}
 
-	}
-
-	private static Releases giveMeSon(final Integer[] partA, final Integer[] partB) {
-		final var representation = new Integer[Releases.sizeOfChromosome];
-		for (int i = 0; i < Releases.sizeOfChromosome; i++) {
-			if (i < partA.length) {
-				representation[i] = partA[i];
-			} else {
-				representation[i] = partB[i - partA.length];
-			}
-		}
-
-		return new Releases(representation);
 	}
 
 	@Override
