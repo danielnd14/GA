@@ -60,10 +60,9 @@ public class Releases implements Solution {
 		var value = chromosome.getValue();
 		var fit = 0.0;
 		for (int i = 0; i < value.length; i++) {
-			if (value[i] == 0.0) {
-				fit = fit + (REQUIREMENTS[i].getImportancia());
-			} else
+			if (value[i] != 0.0) {
 				fit = fit + (REQUIREMENTS[i].getImportancia()) / (value[i] / (double) value.length);
+			}
 		}
 		return fit;
 	}

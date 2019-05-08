@@ -14,7 +14,7 @@ public class ReleaseProblemMain {
 		AbstractPopulation a = new ReleasesPopulationBuilder()
 				.withBinaryTournamentSelection()
 				.withRankMergeStratey()
-				.withPopulationSize(400)
+				.withPopulationSize(800)
 				.withMutationRate(0)
 				.build();
 
