@@ -68,14 +68,11 @@ public final class ReleasesPopulation extends AbstractPopulation {
 	protected void doMutation() {
 		this.offSpring.parallelStream().forEach(solution -> {
 			if (r.nextFloat() < this.MUTATION_RATE) {
-				final var a = r.nextInt(Releases.sizeOfChromosome);
-				final var b = r.nextInt(Releases.sizeOfChromosome);
 				final var chromosome = ((Releases) solution).chromosome().getValue();
-				final var aux = chromosome[a];
-				chromosome[a] = chromosome[b];
-				chromosome[b] = aux;
+				final var a = r.nextInt(Releases.sizeOfChromosome);
+				chromosome[a] = r.nextInt(3) + 1;
 				if (!isValid(solution)) {
-					solution.setPenalty(0.5);
+					repair(solution);
 				}
 				solution.forceNewFitness();
 			}
@@ -109,6 +106,11 @@ public final class ReleasesPopulation extends AbstractPopulation {
 	@Override
 	public void addMember(final Solution solution) {
 		this.members.add(new Releases(((Releases) solution).chromosome().getValue()));
+	}
+
+	@Override
+	protected void repair(final Solution solution) {
+		//fixme--> implementar esse método
 	}
 
 }

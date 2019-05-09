@@ -17,6 +17,7 @@ public abstract class AbstractPopulation {
 	protected final double MUTATION_RATE;
 	final int MAX_GENERATIONS;
 	private final MergeOperation mergeStrategy;
+
 	public AbstractPopulation(final MergeOperation mergeStrategy,
 							  final SelectionOperation selectionStrategy,
 							  final int populationSize,
@@ -100,5 +101,7 @@ public abstract class AbstractPopulation {
 		return members;
 	}
 
-	public abstract void addMember(Solution solution);
+	public abstract void addMember(final Solution solution);
+
+	protected abstract void repair(final Solution solution);
 }
