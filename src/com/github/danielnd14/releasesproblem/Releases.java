@@ -27,23 +27,6 @@ public class Releases implements Solution {
 	final Set<Requirement> sprint2 = new HashSet<>();
 	final Set<Requirement> sprint3 = new HashSet<>();
 	private final Set<Requirement> sprint0 = new HashSet<>();
-	/**
-	 * definição do cromossomo; vetor de inteiros, onde o indice representa o requisito, e o valor na respectiva
-	 * posição representa a release (1,6,10,7)
-	 * <p>
-	 * Requirement{11} menos importante
-	 * Requirement{12}
-	 * Requirement{5}
-	 * Requirement{6}
-	 * Requirement{10}
-	 * Requirement{7}
-	 * Requirement{4}
-	 * Requirement{2}
-	 * Requirement{3}
-	 * Requirement{9}
-	 * Requirement{1}
-	 * Requirement{8} mais importante
-	 */
 	private Chromosome<Integer[]> chromosome;
 	private double penalty = 1;
 	private Double fitnessCache = null;
@@ -125,8 +108,9 @@ public class Releases implements Solution {
 		double price1 = sprint1.parallelStream().mapToDouble(Requirement::getCost).sum();
 		double price2 = sprint2.parallelStream().mapToDouble(Requirement::getCost).sum();
 		double price3 = sprint3.parallelStream().mapToDouble(Requirement::getCost).sum();
-
+		var fit = fitness();
 		return "Releases {\n\n" +
+				"\tfit:" + fit + "\n" +
 				"\tsprint1=" + sprint1 +
 				"\n\tsprint2=" + sprint2 +
 				"\n\tsprint3=" + sprint3 +

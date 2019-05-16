@@ -120,6 +120,7 @@ public final class ReleasesPopulation extends AbstractPopulation {
 
 	@Override
 	protected void repair(final Solution solution) {
+		//fixme alterar algoritmo para tentar colocar a release que estoura o orçamento em uma que nao seja a zero, colocar na zero em ultimo caso
 
 		var releases = (Releases) solution;
 		final var value = releases.chromosome().getValue();
