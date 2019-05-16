@@ -70,7 +70,7 @@ public final class ReleasesPopulation extends AbstractPopulation {
 
 	@Override
 	protected void doMutation() {
-		this.offSpring.parallelStream().forEach(solution -> {
+		this.offSpring.forEach(solution -> {
 			if (r.nextFloat() <= this.MUTATION_RATE) {
 				final var chromosome = ((Releases) solution).chromosome().getValue();
 				chromosome[r.nextInt(chromosome.length)] = r.nextInt(3) + 1;
