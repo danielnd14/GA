@@ -25,7 +25,7 @@ public class Requirement {
 	}
 
 	double getImportancia() {
-		return importancia;
+		return (importancia * cost);
 	}
 
 	@Override
