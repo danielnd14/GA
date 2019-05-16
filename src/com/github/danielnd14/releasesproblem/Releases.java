@@ -1,12 +1,12 @@
 package com.github.danielnd14.releasesproblem;
 
+import com.github.danielnd14.ga.representation.AbstractSolution;
 import com.github.danielnd14.ga.representation.Chromosome;
-import com.github.danielnd14.ga.representation.Solution;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class Releases implements Solution {
+public class Releases extends AbstractSolution {
 	final static int sizeOfChromosome = 10;
 	final static Requirement[] REQUIREMENTS = new Requirement[sizeOfChromosome];
 
@@ -28,8 +28,6 @@ public class Releases implements Solution {
 	final Set<Requirement> sprint3 = new HashSet<>();
 	private final Set<Requirement> sprint0 = new HashSet<>();
 	private Chromosome<Integer[]> chromosome;
-	private double penalty = 1;
-	private Double fitnessCache = null;
 
 	Releases(final Integer[] representation) {
 		if (representation.length != sizeOfChromosome) {
@@ -37,19 +35,6 @@ public class Releases implements Solution {
 		}
 		chromosome = () -> representation;
 		organizaSprint();
-	}
-
-	private static double calculeFitness(final Chromosome<Integer[]> chromosome) {
-		var value = chromosome.getValue();
-		var fit = 0.0;
-		for (int i = 0; i < value.length; i++) {
-
-			if (value[i] != 0) {
-				fit = fit + (REQUIREMENTS[i].getImportancia() / (value[i] / (double) value.length)) - REQUIREMENTS[i].getRisk() * value[i];
-			}
-		}
-
-		return fit;
 	}
 
 	private static Requirement mkRequirement(final int id) {
@@ -80,17 +65,17 @@ public class Releases implements Solution {
 	}
 
 	@Override
-	public double fitness() {
-		if (fitnessCache == null) {
-			fitnessCache = calculeFitness(chromosome);
-		}
-		return fitnessCache;
-	}
+	protected double calculateFitness() {
+		var value = chromosome.getValue();
+		var fit = 0.0;
+		for (int i = 0; i < value.length; i++) {
 
-	@Override
-	public double forceNewFitness() {
-		fitnessCache = calculeFitness(chromosome) * penalty;
-		return fitnessCache;
+			if (value[i] != 0) {
+				fit = fit + (REQUIREMENTS[i].getImportancia() / (value[i] / (double) value.length)) - REQUIREMENTS[i].getRisk() * value[i];
+			}
+		}
+
+		return fit;
 	}
 
 	@Override
@@ -98,10 +83,6 @@ public class Releases implements Solution {
 		return chromosome;
 	}
 
-	@Override
-	public void setPenalty(double percent) {
-		this.penalty = percent;
-	}
 
 	@Override
 	public String toString() {
