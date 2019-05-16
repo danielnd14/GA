@@ -4,6 +4,7 @@ import com.github.danielnd14.ga.representation.AbstractSolution;
 import com.github.danielnd14.ga.representation.Chromosome;
 
 public class Point extends AbstractSolution {
+
 	private final Chromosome<Integer[]> chromosome;
 
 	public Point(Chromosome<Integer[]> chromosome) {

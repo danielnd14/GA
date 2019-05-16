@@ -130,10 +130,4 @@ public class Releases extends AbstractSolution {
 			sprint0.add(mkRequirement(i + 1));
 		}
 	}
-
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
-	}
-
 }

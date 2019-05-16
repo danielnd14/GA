@@ -25,4 +25,9 @@ public abstract class AbstractSolution implements Solution {
 	public void setPenalty(double percent) {
 		this.penalty = percent;
 	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }
