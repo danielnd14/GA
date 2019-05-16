@@ -3,11 +3,14 @@ package com.github.danielnd14.ga.operations.impl.Merge;
 import com.github.danielnd14.ga.operations.MergeOperation;
 import com.github.danielnd14.ga.representation.AbstractPopulation;
 
-public class RankMerge implements MergeOperation {
+import java.util.Comparator;
+
+public final class RankMerge implements MergeOperation {
 	@Override
 	public void merge(final AbstractPopulation population) {
 		final var offSpring = population.getOffSpring();
-		offSpring.parallelStream().forEach(population::addMember);
+		offSpring.sort(Comparator.reverseOrder());
+		offSpring.subList(0, population.POPULATION_SIZE).forEach(population::addMember);
 		offSpring.clear();
 		population.sortMembers();
 		final var members = population.getMembers();

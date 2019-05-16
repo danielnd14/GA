@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class Releases implements Solution {
 	final static int sizeOfChromosome = 10;
-	final private static Requirement[] REQUIREMENTS = new Requirement[sizeOfChromosome];
+	final static Requirement[] REQUIREMENTS = new Requirement[sizeOfChromosome];
 
 	static {
 		REQUIREMENTS[0] = mkRequirement(1);
@@ -60,37 +60,39 @@ public class Releases implements Solution {
 		var value = chromosome.getValue();
 		var fit = 0.0;
 		for (int i = 0; i < value.length; i++) {
-			if (value[i] != 0.0) {
-				fit = fit + (REQUIREMENTS[i].getImportancia()) / (value[i] / (double) value.length);
+
+			if (value[i] != 0) {
+				fit = fit + (REQUIREMENTS[i].getImportancia() / (value[i] / (double) value.length)) - REQUIREMENTS[i].getRisk() * value[i];
 			}
 		}
+
 		return fit;
 	}
 
 	private static Requirement mkRequirement(final int id) {
 		switch (id) {
 			case 1:
-				return new Requirement(id, 60, 3, 25 / 3);
+				return new Requirement(id, 60, 3, (3 * 10 + 4 * 10 + 2 * 5) / 9);
 			case 2:
-				return new Requirement(id, 40, 6, 8);
+				return new Requirement(id, 40, 6, (3 * 8 + 4 * 10 + 2 * 6) / 9);
 			case 3:
-				return new Requirement(id, 40, 2, 6);
+				return new Requirement(id, 40, 2, (3 * 6 + 4 * 4 + 2 * 8) / 9);
 			case 4:
-				return new Requirement(id, 30, 6, 5);
+				return new Requirement(id, 30, 6, (3 * 5 + 4 * 9 + 2) / 9);
 			case 5:
-				return new Requirement(id, 20, 4, 19 / 3);
+				return new Requirement(id, 20, 4, (3 * 7 + 4 * 7 + 2 * 5) / 9);
 			case 6:
-				return new Requirement(id, 20, 8, 16 / 3);
+				return new Requirement(id, 20, 8, (3 * 8 + 4 * 6 + 2 * 2) / 9);
 			case 7:
-				return new Requirement(id, 25, 9, 16 / 3);
+				return new Requirement(id, 25, 9, (3 * 6 + 4 * 6 + 2 * 4) / 9);
 			case 8:
-				return new Requirement(id, 70, 7, 20 / 3);
+				return new Requirement(id, 70, 7, (3 * 9 + 4 * 8 + 2 * 3) / 9);
 			case 9:
-				return new Requirement(id, 50, 6, 6);
+				return new Requirement(id, 50, 6, (3 * 6 + 4 * 7 + 2 * 7) / 9);
 			case 10:
-				return new Requirement(id, 20, 6, 9);
+				return new Requirement(id, 20, 6, (3 * 10 + 4 * 10 + 2 * 7) / 9);
 			default:
-				return new Requirement(id, 0, 99999, 0);//invalid requirement
+				return new Requirement(id, 0, 0, 0);//invalid requirement
 		}
 	}
 
@@ -136,7 +138,13 @@ public class Releases implements Solution {
 				"\n\t}\n}";
 	}
 
-	private void organizaSprint() {
+	void organizaSprint() {
+
+		sprint1.clear();
+		sprint2.clear();
+		sprint3.clear();
+		sprint0.clear();
+
 		final var value = chromosome.getValue();
 
 		for (int i = 0; i < value.length; i++) {
@@ -156,6 +164,11 @@ public class Releases implements Solution {
 			}
 			sprint0.add(mkRequirement(i + 1));
 		}
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 
 }

@@ -13,7 +13,7 @@ public class ReleasesPopulationBuilder implements PopulationBuilder {
 	private SelectionOperation selectStrategy;
 	private MergeOperation mergeStrategy;
 	private int maxGenerations = 200;
-	private int sizeOfPopulation = 200;
+	private int populationSize = 200;
 	private double mutationRate = 0.01;
 	private double crosOverRate = 0.9;
 	private int elitismNumber = 0;
@@ -74,7 +74,7 @@ public class ReleasesPopulationBuilder implements PopulationBuilder {
 
 	@Override
 	public PopulationBuilder withPopulationSize(final int size) {
-		this.sizeOfPopulation = size;
+		this.populationSize = size;
 		return this;
 	}
 
@@ -89,6 +89,6 @@ public class ReleasesPopulationBuilder implements PopulationBuilder {
 		if (this.selectStrategy == null || this.mergeStrategy == null) {
 			throw new RuntimeException("Aparentemente não foi escolhido uma estrategia de seleção ou uma de merge\n");
 		}
-		return new ReleasesPopulation(mergeStrategy, selectStrategy, sizeOfPopulation, elitismNumber, maxGenerations, crosOverRate, mutationRate);
+		return new ReleasesPopulation(mergeStrategy, selectStrategy, populationSize, elitismNumber, maxGenerations, crosOverRate, mutationRate);
 	}
 }

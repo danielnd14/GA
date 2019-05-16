@@ -4,7 +4,7 @@ import com.github.danielnd14.ga.operations.MergeOperation;
 import com.github.danielnd14.ga.representation.AbstractPopulation;
 import com.github.danielnd14.ga.representation.Solution;
 
-public class DescMerge implements MergeOperation {
+public final class DescMerge implements MergeOperation {
 	@Override
 	public void merge(final AbstractPopulation population) {
 		final var offSpring = population.getOffSpring();

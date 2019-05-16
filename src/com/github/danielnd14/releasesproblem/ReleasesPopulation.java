@@ -8,6 +8,7 @@ import com.github.danielnd14.ga.representation.Solution;
 import java.util.Arrays;
 
 public final class ReleasesPopulation extends AbstractPopulation {
+	private static double precoMaximo = 125.0;
 
 	ReleasesPopulation(final MergeOperation mergeStrategy,
 					   final SelectionOperation selectionStrategy,
@@ -34,9 +35,9 @@ public final class ReleasesPopulation extends AbstractPopulation {
 
 	@Override
 	protected void crossOver() {
-		while (this.offSpring.size() < this.POPULATION_SIZE - 1) {
-			final var fatherA = selectionStrategy.select(this);
-			final var fatherB = selectionStrategy.select(this);
+		while (this.offSpring.size() < this.POPULATION_SIZE) {
+			final var fatherA = (Releases) selectionStrategy.select(this);
+			final var fatherB = (Releases) selectionStrategy.select(this);
 
 			if (r.nextDouble() < this.CROSSOVER_RATE) {
 				final var cutPoint = r.nextInt(Releases.sizeOfChromosome);
@@ -57,20 +58,22 @@ public final class ReleasesPopulation extends AbstractPopulation {
 					this.offSpring.add(son2);
 				}
 			} else {
-				offSpring.add(fatherA);
-				offSpring.add(fatherB);
+				try {
+					offSpring.add((Solution) fatherA.clone());
+					offSpring.add((Solution) fatherB.clone());
+				} catch (CloneNotSupportedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
-
 	}
 
 	@Override
 	protected void doMutation() {
-		this.offSpring.parallelStream().forEach(solution -> {
-			if (r.nextFloat() < this.MUTATION_RATE) {
+		this.offSpring.forEach(solution -> {
+			if (r.nextFloat() <= this.MUTATION_RATE) {
 				final var chromosome = ((Releases) solution).chromosome().getValue();
-				final var a = r.nextInt(Releases.sizeOfChromosome);
-				chromosome[a] = r.nextInt(3) + 1;
+				chromosome[r.nextInt(chromosome.length)] = r.nextInt(3) + 1;
 				if (!isValid(solution)) {
 					repair(solution);
 				}
@@ -88,7 +91,7 @@ public final class ReleasesPopulation extends AbstractPopulation {
 		}
 		final var release = new Releases(representation);
 		if (!isValid(release)) {
-			return getRandomSolution();
+			return null;
 		}
 		return release;
 	}
@@ -96,21 +99,55 @@ public final class ReleasesPopulation extends AbstractPopulation {
 	@Override
 	protected boolean isValid(final Solution solution) {
 		final var sol = (Releases) solution;
+		sol.organizaSprint();
 		double priceSprint1 = sol.sprint1.stream().mapToDouble(Requirement::getCost).sum();
 		double priceSprint2 = sol.sprint2.stream().mapToDouble(Requirement::getCost).sum();
 		double priceSprint3 = sol.sprint3.stream().mapToDouble(Requirement::getCost).sum();
-		double precoMaximo = 125.0;
 		return !(priceSprint1 > precoMaximo) && !(priceSprint2 > precoMaximo) && !(priceSprint3 > precoMaximo);
 	}
 
 	@Override
 	public void addMember(final Solution solution) {
-		this.members.add(new Releases(((Releases) solution).chromosome().getValue()));
+
+		final Object clone;
+		try {
+			clone = ((Releases) solution).clone();
+			this.members.add((Releases) clone);
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	protected void repair(final Solution solution) {
-		//fixme--> implementar esse método
-	}
 
+		var releases = (Releases) solution;
+		final var value = releases.chromosome().getValue();
+		double sumR1 = 0;
+		double sumR2 = 0;
+		double sumR3 = 0;
+		for (int i = 0; i < value.length; i++) {
+			if (value[i] == 1) {
+				sumR1 += Releases.REQUIREMENTS[i].getCost();
+				if (sumR1 > precoMaximo) {
+					value[i] = 0;
+				}
+				continue;
+			}
+			if (value[i] == 2) {
+				sumR2 += Releases.REQUIREMENTS[i].getCost();
+				if (sumR2 > precoMaximo) {
+					value[i] = 0;
+				}
+				continue;
+			}
+			if (value[i] == 3) {
+				sumR3 += Releases.REQUIREMENTS[i].getCost();
+				if (sumR3 > precoMaximo) {
+					value[i] = 0;
+				}
+			}
+		}
+		releases.organizaSprint();
+	}
 }

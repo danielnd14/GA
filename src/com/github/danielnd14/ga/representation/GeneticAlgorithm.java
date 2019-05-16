@@ -1,22 +1,15 @@
 package com.github.danielnd14.ga.representation;
 
 public final class GeneticAlgorithm {
-	private final AbstractPopulation population;
 
-	public GeneticAlgorithm(AbstractPopulation population) {
-		this.population = population;
-	}
-
-	public Solution simule() {
-		final var maxGenerations = population.MAX_GENERATIONS;
-		var generationCount = 0;
+	public static Solution simule(final AbstractPopulation population, final StopCriterion stopCriterion) {
 		population.sortMembers();
-		while (generationCount < maxGenerations) {
+		while (stopCriterion.continues(population)) {
 			population.crossOver();
 			population.doMutation();
 			population.merge();
-			generationCount++;
 		}
+
 		return population.getBestSolution();
 	}
 }

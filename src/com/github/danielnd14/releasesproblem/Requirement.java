@@ -4,7 +4,6 @@ public class Requirement {
 	private final int id;
 	private final double cost;
 	private final double risk;
-	private final double avgClient;
 	private Double importancia;
 
 	Requirement(final int id,
@@ -14,17 +13,18 @@ public class Requirement {
 		this.id = id;
 		this.cost = cost;
 		this.risk = risk;
-		this.avgClient = avgClient;
+		this.importancia = avgClient;
 	}
 
 	double getCost() {
 		return cost;
 	}
 
+	double getRisk() {
+		return risk;
+	}
+
 	double getImportancia() {
-		if (importancia == null) {
-			importancia = cost * (risk + avgClient);
-		}
 		return importancia;
 	}
 

@@ -10,12 +10,12 @@ public abstract class AbstractPopulation {
 	protected static final Random r = new Random();
 	public final int POPULATION_SIZE;
 	public final int ELITISM;
+	public final int MAX_GENERATIONS;
 	protected final List<Solution> members;
 	protected final List<Solution> offSpring;
 	protected final SelectionOperation selectionStrategy;
 	protected final double CROSSOVER_RATE;
 	protected final double MUTATION_RATE;
-	final int MAX_GENERATIONS;
 	private final MergeOperation mergeStrategy;
 
 	public AbstractPopulation(final MergeOperation mergeStrategy,
@@ -45,7 +45,10 @@ public abstract class AbstractPopulation {
 	private void initPopulation() {
 		Set<Solution> temp = new HashSet<>();
 		while (temp.size() < this.POPULATION_SIZE) {
-			temp.add(getRandomSolution());
+			final var solution = getRandomSolution();
+			if (solution != null) {
+				temp.add(solution);
+			}
 		}
 		this.members.addAll(temp);
 	}
@@ -88,6 +91,11 @@ public abstract class AbstractPopulation {
 				.collect(Collectors.toList())
 				.subList(0, n);
 	}
+
+	public double getAverageFitnees() {
+		return this.members.parallelStream().mapToDouble(Solution::fitness).average().getAsDouble();
+	}
+
 
 	public Solution getRandomMember() {
 		return members.get(r.nextInt(members.size()));
