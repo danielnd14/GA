@@ -15,6 +15,7 @@ public class ReleaseProblemMain {
 		AbstractPopulation pop1 = new ReleasesPopulationBuilder()
 				.withBinaryTournamentSelection()
 				.withRankMergeStratey()
+				.withMaxGenerations(500)
 				.withPopulationSize(300)
 				.build();
 
@@ -30,20 +31,18 @@ public class ReleaseProblemMain {
 		AbstractPopulation pop2 = new ReleasesPopulationBuilder()
 				.withBinaryTournamentSelection()
 				.withDescMergeStratey()
+				.withMaxGenerations(500)
 				.withElitismNumber(2)
 				.withPopulationSize(300)
 				.build();
 
 		var sl2 = GeneticAlgorithm.simule(pop2, new StopCriterion() {
 
-			double avg = 0;
+			Instant start = Instant.now();
 
 			@Override
 			public boolean continues(final AbstractPopulation population) {
-				final var averageFitnees = population.getAverageFitnees();
-				boolean ret = averageFitnees != avg;
-				avg = averageFitnees;
-				return ret;
+				return Duration.between(start, Instant.now()).toMillis() < 1000;
 			}
 		});
 
