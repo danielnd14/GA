@@ -18,15 +18,7 @@ public class ReleaseProblemMain {
 				.withPopulationSize(300)
 				.build();
 
-		var sl1 = GeneticAlgorithm.simule(pop1, new StopCriterion() {
-			int generation = 0;
-
-			@Override
-			public boolean continues(final AbstractPopulation population) {
-				generation++;
-				return population.MAX_GENERATIONS != generation;
-			}
-		});
+		var sl1 = GeneticAlgorithm.simule(pop1);
 
 		System.out.println(sl1);
 		System.out.println(Duration.between(start, Instant.now()).toMillis() + " milliseconds");
@@ -60,7 +52,7 @@ public class ReleaseProblemMain {
 		System.out.println(Duration.between(start, Instant.now()).toMillis() + " milliseconds");
 
 		System.out.println("________________________________________best of both________________________________________\n");
-		
+
 		if (Math.max(sl1.fitness(), sl2.fitness()) == sl1.fitness()) {
 			System.out.println(sl1);
 		} else {

@@ -12,4 +12,16 @@ public final class GeneticAlgorithm {
 
 		return population.getBestSolution();
 	}
+
+	public static Solution simule(final AbstractPopulation population) {
+		return simule(population, new StopCriterion() {
+			int generation = 0;
+
+			@Override
+			public boolean continues(final AbstractPopulation population) {
+				generation++;
+				return population.MAX_GENERATIONS != generation;
+			}
+		});
+	}
 }
