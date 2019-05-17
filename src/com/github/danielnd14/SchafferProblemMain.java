@@ -16,11 +16,12 @@ public class SchafferProblemMain {
 		var start = Instant.now();
 		var pop = new SchafferPopulationBuilder()
 				.withBinaryTournamentSelection()
-				.withRankMergeStratey()
-				.withCrosOverRate(0.89)
+				.withDescMergeStratey()
+				.withCrosOverRate(0.7)
+				.withElitismNumber(2)
 				.withMutationRate(0.05)
-				.withPopulationSize(300)
-				.withMaxGenerations(300)
+				.withPopulationSize(200)
+				.withMaxGenerations(400)
 				.build();
 
 		var sol = GeneticAlgorithm.simule(pop, false);

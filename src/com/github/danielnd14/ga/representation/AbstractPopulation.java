@@ -62,6 +62,7 @@ public abstract class AbstractPopulation {
 	protected abstract void doMutation();
 
 	void merge() {
+		this.sortMembers();
 		mergeStrategy.merge(this);
 	}
 
