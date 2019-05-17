@@ -6,7 +6,7 @@ public interface Solution extends Comparable<Solution>, Cloneable {
 	 * Método para cálculo de aptidão da representação da solução. Recomenda se criar um cache do valor para
 	 * evitar que o cálculo seja feito toda vez em que o método seja invocado.
 	 */
-	double fitness();
+	Double fitness();
 
 
 	/**

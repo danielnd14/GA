@@ -19,7 +19,7 @@ public class ReleaseProblemMain {
 				.withPopulationSize(300)
 				.build();
 
-		var sl1 = GeneticAlgorithm.simule(pop1);
+		var sl1 = GeneticAlgorithm.simule(pop1, true);
 
 		System.out.println(sl1);
 		System.out.println(Duration.between(start, Instant.now()).toMillis() + " milliseconds");
@@ -36,7 +36,7 @@ public class ReleaseProblemMain {
 				.withPopulationSize(300)
 				.build();
 
-		var sl2 = GeneticAlgorithm.simule(pop2, new StopCriterion() {
+		var sl2 = GeneticAlgorithm.simule(pop2, true, new StopCriterion() {
 
 			Instant start = Instant.now();
 

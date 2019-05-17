@@ -7,7 +7,9 @@ public class SchafferPopulationBuilder extends AbstractPopulationBuilder {
 
 	@Override
 	public AbstractPopulation build() {
-		//fixme implementar a construçao do objeto SchafferPopulation
-		return null;
+		if (this.mergeStrategy == null || this.selectStrategy == null) {
+			throw new RuntimeException("MergeStrategy or SelectStrategy is null");
+		}
+		return new SchafferPopulation(mergeStrategy, selectStrategy, populationSize, elitismNumber, maxGenerations, crosOverRate, mutationRate);
 	}
 }

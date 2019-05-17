@@ -8,7 +8,7 @@ public abstract class AbstractSolution implements Solution {
 	protected abstract double calculateFitness();
 
 	@Override
-	public double fitness() {
+	public Double fitness() {
 		if (fitness == null) {
 			fitness = calculateFitness();
 		}
