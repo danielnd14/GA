@@ -66,6 +66,7 @@ public final class SchafferPopulation extends AbstractPopulation {
 					value[index] = 1;
 				}
 			}
+			solution.forceNewFitness();
 		});
 	}
 
