@@ -20,8 +20,8 @@ public class SchafferProblemMain {
 				.withCrosOverRate(0.7)
 				.withElitismNumber(2)
 				.withMutationRate(0.05)
-				.withPopulationSize(200)
-				.withMaxGenerations(400)
+				.withPopulationSize(250)
+				.withMaxGenerations(250)
 				.build();
 
 		var sol = GeneticAlgorithm.simule(pop, false);
