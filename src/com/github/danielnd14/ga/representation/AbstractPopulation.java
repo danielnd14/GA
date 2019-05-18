@@ -70,7 +70,7 @@ public abstract class AbstractPopulation {
 
 	protected abstract boolean isValid(final Solution solution);
 
-	Solution getBestSolution() {
+	public Solution getBestSolution() {
 		return this.members.parallelStream().max((Solution::compareTo)).orElse(null);
 	}
 

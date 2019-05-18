@@ -11,8 +11,14 @@ public final class RouleteSelection implements SelectionOperation {
 
 	@Override
 	public Solution select(final AbstractPopulation population) {
+		final var fator = r.nextDouble();
+
+		if (fator == 1) {
+			return population.getBestSolution();
+		}
+
 		final var sumFit = population.getSumOfFitness();
-		final var threshold = r.nextDouble() * sumFit;
+		final var threshold = fator * sumFit;
 		final var members = population.getMembers();
 		var sumA = 0.0;
 

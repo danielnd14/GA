@@ -32,7 +32,7 @@ public final class SchafferPopulation extends AbstractPopulation {
 			final var fatherA = (Point) selectionStrategy.select(this);
 			final var fatherB = (Point) selectionStrategy.select(this);
 
-			if (r.nextDouble() < this.CROSSOVER_RATE) {
+			if (r.nextDouble() <= this.CROSSOVER_RATE) {
 				final var cutPoint = r.nextInt(Point.sizeOfChromosome);
 				final var genValuesFatherA = (Integer[]) fatherA.chromosome().getValue();
 				final var genValuesFatherB = (Integer[]) fatherB.chromosome().getValue();
@@ -56,15 +56,11 @@ public final class SchafferPopulation extends AbstractPopulation {
 
 	@Override
 	protected void doMutation() {
-		offSpring.forEach(solution -> {
+		offSpring.parallelStream().forEach(solution -> {
 			if (r.nextDouble() <= MUTATION_RATE) {
 				final var value = ((Point) solution).chromosome().getValue();
 				var index = r.nextInt(Point.sizeOfChromosome);
-				if (value[index] == 1) {
-					value[index] = 0;
-				} else {
-					value[index] = 1;
-				}
+				value[index] = value[index] == 1 ? 0 : 1;
 			}
 			solution.forceNewFitness();
 		});

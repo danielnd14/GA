@@ -17,10 +17,10 @@ public class SchafferProblemMain {
 		var pop = new SchafferPopulationBuilder()
 				.withBinaryTournamentSelection()
 				.withDescMergeStratey()
-				.withCrosOverRate(0.7)
+				.withCrosOverRate(0.9)
 				.withElitismNumber(2)
 				.withMutationRate(0.05)
-				.withPopulationSize(250)
+				.withPopulationSize(500)
 				.withMaxGenerations(250)
 				.build();
 
