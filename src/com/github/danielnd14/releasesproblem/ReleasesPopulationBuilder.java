@@ -1,6 +1,6 @@
 package com.github.danielnd14.releasesproblem;
 
-import com.github.danielnd14.ga.builder.AbstractPopulationBuilder;
+import com.github.danielnd14.ga.builder.impl.AbstractPopulationBuilder;
 import com.github.danielnd14.ga.representation.AbstractPopulation;
 
 public class ReleasesPopulationBuilder extends AbstractPopulationBuilder {

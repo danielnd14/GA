@@ -1,5 +1,6 @@
 package com.github.danielnd14.ga.representation;
 
+import com.github.danielnd14.ga.helpers.StatisticHelper;
 import com.github.danielnd14.ga.operations.MergeOperation;
 import com.github.danielnd14.ga.operations.SelectionOperation;
 
@@ -94,7 +95,7 @@ public abstract class AbstractPopulation {
 	}
 
 	public double getAverageFitnees() {
-		return this.members.parallelStream().mapToDouble(Solution::fitness).average().getAsDouble();
+		return StatisticHelper.getAverage(this.members);
 	}
 
 

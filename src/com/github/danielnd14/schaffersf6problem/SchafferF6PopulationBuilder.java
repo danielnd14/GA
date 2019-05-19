@@ -1,6 +1,6 @@
 package com.github.danielnd14.schaffersf6problem;
 
-import com.github.danielnd14.ga.builder.AbstractPopulationBuilder;
+import com.github.danielnd14.ga.builder.impl.AbstractPopulationBuilder;
 import com.github.danielnd14.ga.representation.AbstractPopulation;
 
 public final class SchafferF6PopulationBuilder extends AbstractPopulationBuilder {

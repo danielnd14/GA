@@ -1,5 +1,6 @@
-package com.github.danielnd14.ga.builder;
+package com.github.danielnd14.ga.builder.impl;
 
+import com.github.danielnd14.ga.builder.PopulationBuilder;
 import com.github.danielnd14.ga.operations.MergeOperation;
 import com.github.danielnd14.ga.operations.SelectionOperation;
 import com.github.danielnd14.ga.operations.impl.Merge.DescMerge;
