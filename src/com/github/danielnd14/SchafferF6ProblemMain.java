@@ -6,7 +6,7 @@ import com.github.danielnd14.schaffersf6problem.SchafferF6PopulationBuilder;
 import java.time.Duration;
 import java.time.Instant;
 
-public class SchafferProblemMain {
+public class SchafferF6ProblemMain {
 	public static void main(String[] args) {
 		var start = Instant.now();
 		var pop = new SchafferF6PopulationBuilder()
