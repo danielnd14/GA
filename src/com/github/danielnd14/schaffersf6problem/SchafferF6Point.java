@@ -6,7 +6,7 @@ import com.github.danielnd14.ga.representation.Chromosome;
 
 import java.util.Arrays;
 
-public class SchafferF6Point extends AbstractSolution {
+public final class SchafferF6Point extends AbstractSolution {
 
 	static int sizeOfChromosome = 46;
 
