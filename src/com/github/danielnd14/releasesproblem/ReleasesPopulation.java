@@ -58,12 +58,8 @@ public final class ReleasesPopulation extends AbstractPopulation {
 					this.offSpring.add(son2);
 				}
 			} else {
-				try {
-					offSpring.add((Solution) fatherA.clone());
-					offSpring.add((Solution) fatherB.clone());
-				} catch (CloneNotSupportedException e) {
-					e.printStackTrace();
-				}
+				offSpring.add(fatherA.getClone());
+				offSpring.add(fatherB.getClone());
 			}
 		}
 	}

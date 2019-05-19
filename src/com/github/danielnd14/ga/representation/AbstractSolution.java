@@ -30,4 +30,15 @@ public abstract class AbstractSolution implements Solution {
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T extends Solution> T getClone() {
+		try {
+			return (T) this.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

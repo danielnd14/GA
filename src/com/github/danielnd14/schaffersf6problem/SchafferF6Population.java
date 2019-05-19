@@ -45,11 +45,8 @@ public final class SchafferF6Population extends AbstractPopulation {
 				this.offSpring.add(son1);
 				this.offSpring.add(son2);
 			} else {
-				try {
-					offSpring.add((Solution) fatherA.clone());
-					offSpring.add((Solution) fatherB.clone());
-				} catch (CloneNotSupportedException ignored) {
-				}
+				offSpring.add(fatherA.getClone());
+				offSpring.add(fatherB.getClone());
 			}
 		}
 	}

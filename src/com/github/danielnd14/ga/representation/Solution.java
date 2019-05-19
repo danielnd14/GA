@@ -22,4 +22,13 @@ public interface Solution extends Comparable<Solution>, Cloneable {
 	default int compareTo(final Solution o) {
 		return Double.compare(this.fitness(), o.fitness());
 	}
+
+	/**
+	 * Use this instead clone.
+	 * Implement this method whith try-cat and conversions of inherent types of use of super.clone
+	 *
+	 * @see AbstractSolution
+	 * @return implementation of Solution
+	 */
+	<T extends Solution> T getClone();
 }
