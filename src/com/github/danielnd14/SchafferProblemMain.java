@@ -1,20 +1,15 @@
 package com.github.danielnd14;
 
 import com.github.danielnd14.ga.representation.GeneticAlgorithm;
-import com.github.danielnd14.schaffersf6Problem.SchafferPopulationBuilder;
+import com.github.danielnd14.schaffersf6problem.SchafferF6PopulationBuilder;
 
 import java.time.Duration;
 import java.time.Instant;
 
-/**
- * Algoritmo não necessariamente pronto, é preciso revisar o codigo e testar
- * fixme revisar, testar e avaliar!!!
- */
-
 public class SchafferProblemMain {
 	public static void main(String[] args) {
 		var start = Instant.now();
-		var pop = new SchafferPopulationBuilder()
+		var pop = new SchafferF6PopulationBuilder()
 				.withBinaryTournamentSelection()
 				.withDescMergeStratey()
 				.withCrosOverRate(0.9)

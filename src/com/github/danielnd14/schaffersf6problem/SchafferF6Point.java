@@ -1,4 +1,4 @@
-package com.github.danielnd14.schaffersf6Problem;
+package com.github.danielnd14.schaffersf6problem;
 
 import com.github.danielnd14.ga.helpers.NumberHelper;
 import com.github.danielnd14.ga.representation.AbstractSolution;
@@ -6,13 +6,13 @@ import com.github.danielnd14.ga.representation.Chromosome;
 
 import java.util.Arrays;
 
-public class Point extends AbstractSolution {
+public class SchafferF6Point extends AbstractSolution {
 
 	static int sizeOfChromosome = 46;
 
 	private final Chromosome<Integer[]> chromosome;
 
-	Point(Chromosome<Integer[]> chromosome) {
+	SchafferF6Point(Chromosome<Integer[]> chromosome) {
 		this.chromosome = chromosome;
 	}
 
